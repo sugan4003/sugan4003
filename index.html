@@ -1,75 +1,265 @@
-<!-- CUSTOM DROPDOWN -->
+<!-- 
+CHANGES MADE
 
-<div class="setting-group">
+✓ Better settings UI
+✓ Better dropdown styling
+✓ Added A Range selector
+✓ Added B Range selector
+✓ Default = 30
+✓ Cleaner spacing
+✓ Better mobile UX
+✓ Better form controls
+✓ Multiplication reverse improved
+✓ Consistent card design
+-->
 
-  <label class="setting-label">
-    Quiz Type
-  </label>
+<style>
 
-  <div class="dropdown">
+.settings-panel{
+  display:none;
+  margin-bottom:20px;
+  background:rgba(255,255,255,0.06);
+  border-radius:20px;
+  padding:18px;
+}
 
-    <button class="dropdown-btn"
-            id="dropdownBtn"
-            onclick="toggleDropdown()">
+.setting-group{
+  margin-bottom:16px;
+}
 
-      <span id="selectedQuiz">
+.setting-label{
+  display:block;
+  margin-bottom:8px;
+  font-size:14px;
+  font-weight:500;
+  color:#cbd5e1;
+}
+
+/* Better Dropdown */
+
+.custom-select{
+
+  width:100%;
+
+  padding:14px 16px;
+
+  border:none;
+  border-radius:14px;
+
+  background:
+  rgba(255,255,255,0.08);
+
+  color:white;
+
+  font-size:15px;
+
+  outline:none;
+
+  appearance:none;
+
+  cursor:pointer;
+
+  transition:0.2s;
+
+  border:
+  1px solid rgba(255,255,255,0.08);
+
+}
+
+.custom-select:hover{
+
+  background:
+  rgba(255,255,255,0.12);
+}
+
+.custom-select:focus{
+
+  border:
+  1px solid #3b82f6;
+
+  box-shadow:
+  0 0 0 3px rgba(59,130,246,0.2);
+}
+
+/* Dropdown options */
+
+.custom-select option{
+
+  background:#111827;
+  color:white;
+}
+
+/* Better Input */
+
+.setting-input{
+
+  width:100%;
+
+  padding:14px 16px;
+
+  border:none;
+  border-radius:14px;
+
+  background:
+  rgba(255,255,255,0.08);
+
+  color:white;
+
+  font-size:15px;
+
+  outline:none;
+
+  transition:0.2s;
+
+  border:
+  1px solid rgba(255,255,255,0.08);
+}
+
+.setting-input:focus{
+
+  border:
+  1px solid #3b82f6;
+
+  box-shadow:
+  0 0 0 3px rgba(59,130,246,0.2);
+}
+
+/* Range Layout */
+
+.range-grid{
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:12px;
+}
+
+.save-btn{
+
+  width:100%;
+
+  margin-top:10px;
+
+  padding:15px;
+
+  border:none;
+  border-radius:16px;
+
+  background:
+  linear-gradient(
+    135deg,
+    #2563eb,
+    #7c3aed
+  );
+
+  color:white;
+
+  font-size:15px;
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:0.2s;
+}
+
+.save-btn:hover{
+
+  transform:translateY(-1px);
+}
+
+</style>
+
+<!-- SETTINGS PANEL -->
+
+<div class="settings-panel"
+     id="settingsPanel">
+
+  <div class="setting-group">
+
+    <label class="setting-label">
+      Quiz Type
+    </label>
+
+    <select id="quizType"
+            class="custom-select">
+
+      <option value="alphaToNum">
         Alphabet → Number
-      </span>
+      </option>
 
-      <span class="arrow">
-        ▼
-      </span>
-
-    </button>
-
-    <div class="dropdown-menu"
-         id="dropdownMenu">
-
-      <div class="dropdown-item"
-           onclick="selectQuiz('alphaToNum',
-           'Alphabet → Number')">
-
-        Alphabet → Number
-
-      </div>
-
-      <div class="dropdown-item"
-           onclick="selectQuiz('numToAlpha',
-           'Number → Alphabet')">
-
+      <option value="numToAlpha">
         Number → Alphabet
+      </option>
 
-      </div>
-
-      <div class="dropdown-item"
-           onclick="selectQuiz('multiply',
-           'Multiplication')">
-
+      <option value="multiply">
         Multiplication
+      </option>
 
-      </div>
-
-      <div class="dropdown-item"
-           onclick="selectQuiz('multiplyReverse',
-           'Multiplication Reverse')">
-
+      <option value="multiplyReverse">
         Multiplication Reverse
+      </option>
 
-      </div>
-
-      <div class="dropdown-item"
-           onclick="selectQuiz('square',
-           'Squares')">
-
+      <option value="square">
         Squares
+      </option>
+
+      <option value="cube">
+        Cubes
+      </option>
+
+    </select>
+
+  </div>
+
+  <div class="setting-group">
+
+    <label class="setting-label">
+      Timer (seconds)
+    </label>
+
+    <input type="number"
+           id="timerInput"
+           class="setting-input"
+           value="10"
+           min="1"
+           max="60">
+
+  </div>
+
+  <div class="setting-group">
+
+    <label class="setting-label">
+      Multiplication Range
+    </label>
+
+    <div class="range-grid">
+
+      <div>
+
+        <label class="setting-label">
+          A Max
+        </label>
+
+        <input type="number"
+               id="rangeA"
+               class="setting-input"
+               value="30"
+               min="1">
 
       </div>
 
-      <div class="dropdown-item"
-           onclick="selectQuiz('cube',
-           'Cubes')">
+      <div>
 
-        Cubes
+        <label class="setting-label">
+          B Max
+        </label>
+
+        <input type="number"
+               id="rangeB"
+               class="setting-input"
+               value="30"
+               min="1">
 
       </div>
 
@@ -77,4 +267,88 @@
 
   </div>
 
+  <button class="save-btn"
+          onclick="saveSettings()">
+
+    Save Settings
+
+  </button>
+
 </div>
+
+<script>
+
+/* NEW VARIABLES */
+
+let maxA = 30;
+let maxB = 30;
+
+/* UPDATED SAVE SETTINGS */
+
+function saveSettings(){
+
+  quizType =
+  document.getElementById("quizType").value;
+
+  quizTime =
+  parseInt(
+    document.getElementById("timerInput").value
+  );
+
+  maxA =
+  parseInt(
+    document.getElementById("rangeA").value
+  ) || 30;
+
+  maxB =
+  parseInt(
+    document.getElementById("rangeB").value
+  ) || 30;
+
+  toggleSettings();
+
+  generateQuestion();
+}
+
+/* UPDATED MULTIPLICATION */
+
+else if(quizType === "multiply"){
+
+  const a =
+  Math.floor(Math.random()*maxA)+1;
+
+  const b =
+  Math.floor(Math.random()*maxB)+1;
+
+  currentAnswer = a * b;
+
+  q = `${a} × ${b} = ?`;
+}
+
+/* UPDATED MULTIPLICATION REVERSE */
+
+else if(quizType === "multiplyReverse"){
+
+  const a =
+  Math.floor(Math.random()*maxA)+1;
+
+  const b =
+  Math.floor(Math.random()*maxB)+1;
+
+  const result = a * b;
+
+  currentAnswer =
+  `${a},${b}`;
+
+  q =
+  `? × ? = 
+   <span class="big">${result}</span>
+   <br>
+   <span style="
+   font-size:14px;
+   color:#94a3b8;">
+   Enter as: a,b
+   </span>`;
+}
+
+</script>
