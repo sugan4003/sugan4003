@@ -1,0 +1,80 @@
+<!-- CUSTOM DROPDOWN -->
+
+<div class="setting-group">
+
+  <label class="setting-label">
+    Quiz Type
+  </label>
+
+  <div class="dropdown">
+
+    <button class="dropdown-btn"
+            id="dropdownBtn"
+            onclick="toggleDropdown()">
+
+      <span id="selectedQuiz">
+        Alphabet → Number
+      </span>
+
+      <span class="arrow">
+        ▼
+      </span>
+
+    </button>
+
+    <div class="dropdown-menu"
+         id="dropdownMenu">
+
+      <div class="dropdown-item"
+           onclick="selectQuiz('alphaToNum',
+           'Alphabet → Number')">
+
+        Alphabet → Number
+
+      </div>
+
+      <div class="dropdown-item"
+           onclick="selectQuiz('numToAlpha',
+           'Number → Alphabet')">
+
+        Number → Alphabet
+
+      </div>
+
+      <div class="dropdown-item"
+           onclick="selectQuiz('multiply',
+           'Multiplication')">
+
+        Multiplication
+
+      </div>
+
+      <div class="dropdown-item"
+           onclick="selectQuiz('multiplyReverse',
+           'Multiplication Reverse')">
+
+        Multiplication Reverse
+
+      </div>
+
+      <div class="dropdown-item"
+           onclick="selectQuiz('square',
+           'Squares')">
+
+        Squares
+
+      </div>
+
+      <div class="dropdown-item"
+           onclick="selectQuiz('cube',
+           'Cubes')">
+
+        Cubes
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
