@@ -1,96 +1,145 @@
-<!-- 
-CHANGES MADE
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-✓ Better settings UI
-✓ Better dropdown styling
-✓ Added A Range selector
-✓ Added B Range selector
-✓ Default = 30
-✓ Cleaner spacing
-✓ Better mobile UX
-✓ Better form controls
-✓ Multiplication reverse improved
-✓ Consistent card design
--->
+<title>Brain Trainer</title>
+
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet">
 
 <style>
 
-.settings-panel{
-  display:none;
-  margin-bottom:20px;
-  background:rgba(255,255,255,0.06);
-  border-radius:20px;
-  padding:18px;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-.setting-group{
-  margin-bottom:16px;
+body{
+
+  font-family:'Poppins',sans-serif;
+
+  background:
+  linear-gradient(
+    135deg,
+    #0f172a,
+    #111827
+  );
+
+  min-height:100vh;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  padding:20px;
+
+  color:white;
 }
 
-.setting-label{
-  display:block;
-  margin-bottom:8px;
-  font-size:14px;
-  font-weight:500;
-  color:#cbd5e1;
-}
-
-/* Better Dropdown */
-
-.custom-select{
+.card{
 
   width:100%;
+  max-width:460px;
 
-  padding:14px 16px;
+  background:
+  rgba(255,255,255,0.08);
+
+  backdrop-filter:blur(20px);
+
+  border:
+  1px solid rgba(255,255,255,0.12);
+
+  border-radius:28px;
+
+  padding:24px;
+
+  box-shadow:
+  0 10px 40px rgba(0,0,0,0.35);
+}
+
+.topbar{
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  margin-bottom:20px;
+}
+
+.title{
+
+  font-size:24px;
+  font-weight:700;
+}
+
+.settings-btn{
+
+  width:46px;
+  height:46px;
 
   border:none;
   border-radius:14px;
 
   background:
-  rgba(255,255,255,0.08);
+  rgba(255,255,255,0.1);
 
   color:white;
 
-  font-size:15px;
-
-  outline:none;
-
-  appearance:none;
+  font-size:20px;
 
   cursor:pointer;
 
   transition:0.2s;
-
-  border:
-  1px solid rgba(255,255,255,0.08);
-
 }
 
-.custom-select:hover{
+.settings-btn:hover{
+
+  transform:scale(1.05);
+}
+
+.settings-panel{
+
+  display:none;
+
+  margin-bottom:20px;
 
   background:
-  rgba(255,255,255,0.12);
+  rgba(255,255,255,0.06);
+
+  border-radius:20px;
+
+  padding:18px;
 }
 
-.custom-select:focus{
+.setting-group{
 
-  border:
-  1px solid #3b82f6;
-
-  box-shadow:
-  0 0 0 3px rgba(59,130,246,0.2);
+  margin-bottom:16px;
 }
 
-/* Dropdown options */
+.setting-label{
 
-.custom-select option{
+  display:block;
 
-  background:#111827;
-  color:white;
+  margin-bottom:8px;
+
+  font-size:14px;
+
+  color:#cbd5e1;
 }
 
-/* Better Input */
-
+.custom-select,
 .setting-input{
 
   width:100%;
@@ -109,22 +158,20 @@ CHANGES MADE
 
   outline:none;
 
-  transition:0.2s;
-
   border:
   1px solid rgba(255,255,255,0.08);
 }
 
-.setting-input:focus{
+.custom-select{
 
-  border:
-  1px solid #3b82f6;
-
-  box-shadow:
-  0 0 0 3px rgba(59,130,246,0.2);
+  appearance:none;
+  cursor:pointer;
 }
 
-/* Range Layout */
+.custom-select option{
+
+  background:#111827;
+}
 
 .range-grid{
 
@@ -139,7 +186,7 @@ CHANGES MADE
 
   width:100%;
 
-  margin-top:10px;
+  margin-top:8px;
 
   padding:15px;
 
@@ -155,135 +202,385 @@ CHANGES MADE
 
   color:white;
 
-  font-size:15px;
   font-weight:600;
 
   cursor:pointer;
-
-  transition:0.2s;
 }
 
-.save-btn:hover{
+.timer-top{
 
-  transform:translateY(-1px);
+  display:flex;
+  justify-content:space-between;
+
+  margin-bottom:10px;
+
+  color:#cbd5e1;
+
+  font-size:14px;
+}
+
+.progress{
+
+  width:100%;
+  height:10px;
+
+  background:
+  rgba(255,255,255,0.08);
+
+  border-radius:20px;
+
+  overflow:hidden;
+}
+
+.progress-bar{
+
+  height:100%;
+  width:100%;
+
+  background:
+  linear-gradient(
+    90deg,
+    #22c55e,
+    #3b82f6
+  );
+
+  transition:width 1s linear;
+}
+
+.question{
+
+  margin:35px 0;
+
+  text-align:center;
+
+  font-size:28px;
+  font-weight:700;
+
+  line-height:1.5;
+}
+
+.big{
+
+  font-size:48px;
+}
+
+.answer{
+
+  width:100%;
+
+  padding:18px;
+
+  border:none;
+  border-radius:18px;
+
+  background:
+  rgba(255,255,255,0.08);
+
+  color:white;
+
+  font-size:22px;
+
+  text-align:center;
+
+  outline:none;
+}
+
+.answer::placeholder{
+
+  color:#94a3b8;
+}
+
+.answer:focus{
+
+  box-shadow:
+  0 0 0 3px rgba(59,130,246,0.25);
+}
+
+.submit{
+
+  width:100%;
+
+  margin-top:18px;
+
+  padding:16px;
+
+  border:none;
+  border-radius:18px;
+
+  background:
+  linear-gradient(
+    135deg,
+    #3b82f6,
+    #8b5cf6
+  );
+
+  color:white;
+
+  font-size:17px;
+  font-weight:600;
+
+  cursor:pointer;
+}
+
+.feedback{
+
+  min-height:32px;
+
+  margin-top:18px;
+
+  text-align:center;
+
+  font-size:17px;
+  font-weight:600;
+}
+
+.stats{
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:14px;
+
+  margin-top:22px;
+}
+
+.stat{
+
+  background:
+  rgba(255,255,255,0.07);
+
+  border-radius:18px;
+
+  padding:16px;
+
+  text-align:center;
+}
+
+.stat-value{
+
+  font-size:24px;
+  font-weight:700;
+}
+
+.stat-label{
+
+  margin-top:4px;
+
+  font-size:13px;
+
+  color:#cbd5e1;
 }
 
 </style>
+</head>
 
-<!-- SETTINGS PANEL -->
+<body>
 
-<div class="settings-panel"
-     id="settingsPanel">
+<div class="card">
 
-  <div class="setting-group">
+  <div class="topbar">
 
-    <label class="setting-label">
-      Quiz Type
-    </label>
+    <div class="title">
+      Brain Trainer
+    </div>
 
-    <select id="quizType"
-            class="custom-select">
-
-      <option value="alphaToNum">
-        Alphabet → Number
-      </option>
-
-      <option value="numToAlpha">
-        Number → Alphabet
-      </option>
-
-      <option value="multiply">
-        Multiplication
-      </option>
-
-      <option value="multiplyReverse">
-        Multiplication Reverse
-      </option>
-
-      <option value="square">
-        Squares
-      </option>
-
-      <option value="cube">
-        Cubes
-      </option>
-
-    </select>
+    <button class="settings-btn"
+            onclick="toggleSettings()">
+      ⚙
+    </button>
 
   </div>
 
-  <div class="setting-group">
+  <div class="settings-panel"
+       id="settingsPanel">
 
-    <label class="setting-label">
-      Timer (seconds)
-    </label>
+    <div class="setting-group">
 
-    <input type="number"
-           id="timerInput"
-           class="setting-input"
-           value="10"
-           min="1"
-           max="60">
+      <label class="setting-label">
+        Quiz Type
+      </label>
 
-  </div>
+      <select id="quizType"
+              class="custom-select">
 
-  <div class="setting-group">
+        <option value="alphaToNum">
+          Alphabet → Number
+        </option>
 
-    <label class="setting-label">
-      Multiplication Range
-    </label>
+        <option value="numToAlpha">
+          Number → Alphabet
+        </option>
 
-    <div class="range-grid">
+        <option value="multiply">
+          Multiplication
+        </option>
 
-      <div>
+        <option value="multiplyReverse">
+          Reverse Multiplication
+        </option>
 
-        <label class="setting-label">
-          A Max
-        </label>
+        <option value="square">
+          Squares
+        </option>
+
+        <option value="cube">
+          Cubes
+        </option>
+
+      </select>
+
+    </div>
+
+    <div class="setting-group">
+
+      <label class="setting-label">
+        Timer (seconds)
+      </label>
+
+      <input type="number"
+             id="timerInput"
+             class="setting-input"
+             value="10"
+             min="1"
+             max="60">
+
+    </div>
+
+    <div class="setting-group">
+
+      <label class="setting-label">
+        Multiplication Range
+      </label>
+
+      <div class="range-grid">
 
         <input type="number"
                id="rangeA"
                class="setting-input"
                value="30"
-               min="1">
-
-      </div>
-
-      <div>
-
-        <label class="setting-label">
-          B Max
-        </label>
+               min="1"
+               placeholder="A Max">
 
         <input type="number"
                id="rangeB"
                class="setting-input"
                value="30"
-               min="1">
+               min="1"
+               placeholder="B Max">
 
+      </div>
+
+    </div>
+
+    <button class="save-btn"
+            onclick="saveSettings()">
+
+      Save Settings
+
+    </button>
+
+  </div>
+
+  <div class="timer-top">
+
+    <span>Time Left</span>
+
+    <span id="timerText">
+      10s
+    </span>
+
+  </div>
+
+  <div class="progress">
+
+    <div class="progress-bar"
+         id="progressBar">
+    </div>
+
+  </div>
+
+  <div class="question"
+       id="question">
+  </div>
+
+  <input type="text"
+         id="answer"
+         class="answer"
+         placeholder="Type answer">
+
+  <button class="submit"
+          onclick="submitAnswer()">
+
+    Submit
+
+  </button>
+
+  <div class="feedback"
+       id="feedback">
+  </div>
+
+  <div class="stats">
+
+    <div class="stat">
+
+      <div class="stat-value"
+           id="correctCount">
+        0
+      </div>
+
+      <div class="stat-label">
+        Correct
+      </div>
+
+    </div>
+
+    <div class="stat">
+
+      <div class="stat-value"
+           id="totalCount">
+        0
+      </div>
+
+      <div class="stat-label">
+        Total
       </div>
 
     </div>
 
   </div>
 
-  <button class="save-btn"
-          onclick="saveSettings()">
-
-    Save Settings
-
-  </button>
-
 </div>
 
 <script>
 
-/* NEW VARIABLES */
+let currentAnswer = "";
+
+let correct = 0;
+let total = 0;
+
+let timer;
+let timeLeft;
+
+let answered = false;
+
+let quizType = "alphaToNum";
+
+let quizTime = 10;
 
 let maxA = 30;
 let maxB = 30;
 
-/* UPDATED SAVE SETTINGS */
+function toggleSettings(){
+
+  const panel =
+  document.getElementById("settingsPanel");
+
+  panel.style.display =
+  panel.style.display === "block"
+  ? "none"
+  : "block";
+}
 
 function saveSettings(){
 
@@ -310,45 +607,250 @@ function saveSettings(){
   generateQuestion();
 }
 
-/* UPDATED MULTIPLICATION */
+function generateQuestion(){
 
-else if(quizType === "multiply"){
+  clearInterval(timer);
 
-  const a =
-  Math.floor(Math.random()*maxA)+1;
+  answered = false;
 
-  const b =
-  Math.floor(Math.random()*maxB)+1;
+  document.getElementById("answer").value = "";
 
-  currentAnswer = a * b;
+  document.getElementById("answer").focus();
 
-  q = `${a} × ${b} = ?`;
+  document.getElementById("feedback").innerText = "";
+
+  let q = "";
+
+  if(quizType === "alphaToNum"){
+
+    const letter =
+    String.fromCharCode(
+      65 + Math.floor(Math.random()*26)
+    );
+
+    currentAnswer =
+    letter.charCodeAt(0) - 64;
+
+    q =
+    `What number is<br>
+    <span class="big">${letter}</span>`;
+  }
+
+  else if(quizType === "numToAlpha"){
+
+    const number =
+    Math.floor(Math.random()*26)+1;
+
+    currentAnswer =
+    String.fromCharCode(64 + number);
+
+    q =
+    `Which alphabet is<br>
+    <span class="big">${number}</span>`;
+  }
+
+  else if(quizType === "multiply"){
+
+    const a =
+    Math.floor(Math.random()*maxA)+1;
+
+    const b =
+    Math.floor(Math.random()*maxB)+1;
+
+    currentAnswer = a*b;
+
+    q =
+    `<span class="big">
+    ${a} × ${b}
+    </span><br>= ?`;
+  }
+
+  else if(quizType === "multiplyReverse"){
+
+    const a =
+    Math.floor(Math.random()*maxA)+1;
+
+    const b =
+    Math.floor(Math.random()*maxB)+1;
+
+    currentAnswer =
+    `${a},${b}`;
+
+    const result = a*b;
+
+    q =
+    `? × ? =<br>
+    <span class="big">
+    ${result}
+    </span>
+    <br>
+    <span style="
+    font-size:14px;
+    color:#94a3b8;">
+    Enter as: a,b
+    </span>`;
+  }
+
+  else if(quizType === "square"){
+
+    const n =
+    Math.floor(Math.random()*30)+1;
+
+    currentAnswer = n*n;
+
+    q =
+    `<span class="big">
+    ${n}²
+    </span><br>= ?`;
+  }
+
+  else if(quizType === "cube"){
+
+    const n =
+    Math.floor(Math.random()*30)+1;
+
+    currentAnswer = n*n*n;
+
+    q =
+    `<span class="big">
+    ${n}³
+    </span><br>= ?`;
+  }
+
+  document.getElementById("question")
+  .innerHTML = q;
+
+  startTimer();
 }
 
-/* UPDATED MULTIPLICATION REVERSE */
+function startTimer(){
 
-else if(quizType === "multiplyReverse"){
+  timeLeft = quizTime;
 
-  const a =
-  Math.floor(Math.random()*maxA)+1;
+  updateTimerUI();
 
-  const b =
-  Math.floor(Math.random()*maxB)+1;
+  timer = setInterval(()=>{
 
-  const result = a * b;
+    timeLeft--;
 
-  currentAnswer =
-  `${a},${b}`;
+    updateTimerUI();
 
-  q =
-  `? × ? = 
-   <span class="big">${result}</span>
-   <br>
-   <span style="
-   font-size:14px;
-   color:#94a3b8;">
-   Enter as: a,b
-   </span>`;
+    if(timeLeft <= 0){
+
+      clearInterval(timer);
+
+      if(!answered){
+
+        answered = true;
+
+        total++;
+
+        updateStats();
+
+        showFeedback(
+          `⏰ Answer: ${currentAnswer}`,
+          "#f59e0b"
+        );
+
+        setTimeout(
+          generateQuestion,
+          1500
+        );
+      }
+    }
+
+  },1000);
 }
+
+function updateTimerUI(){
+
+  document.getElementById("timerText")
+  .innerText =
+  `${timeLeft}s`;
+
+  const width =
+  (timeLeft / quizTime) * 100;
+
+  document.getElementById("progressBar")
+  .style.width =
+  width + "%";
+}
+
+function submitAnswer(){
+
+  if(answered) return;
+
+  answered = true;
+
+  clearInterval(timer);
+
+  const userAnswer =
+  document.getElementById("answer")
+  .value
+  .trim()
+  .toUpperCase();
+
+  total++;
+
+  if(userAnswer ==
+     currentAnswer.toString().toUpperCase()){
+
+    correct++;
+
+    showFeedback(
+      "✅ Correct",
+      "#22c55e"
+    );
+
+  }else{
+
+    showFeedback(
+      `❌ Correct: ${currentAnswer}`,
+      "#ef4444"
+    );
+  }
+
+  updateStats();
+
+  setTimeout(
+    generateQuestion,
+    1500
+  );
+}
+
+function showFeedback(text,color){
+
+  const feedback =
+  document.getElementById("feedback");
+
+  feedback.innerText = text;
+
+  feedback.style.color = color;
+}
+
+function updateStats(){
+
+  document.getElementById("correctCount")
+  .innerText = correct;
+
+  document.getElementById("totalCount")
+  .innerText = total;
+}
+
+document
+.getElementById("answer")
+.addEventListener("keydown",(e)=>{
+
+  if(e.key === "Enter"){
+
+    submitAnswer();
+  }
+});
+
+generateQuestion();
 
 </script>
+
+</body>
+</html>
+```
